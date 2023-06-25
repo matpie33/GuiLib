@@ -1,12 +1,13 @@
 package main;
 
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Text;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 @Component
 public class Window {
@@ -20,8 +21,13 @@ public class Window {
         contentPane.add(new JButton("Start"));
         JTextComponent helloWorld = TextComponentBuilder.create(TextComponentType.TEXT_FIELD).setText("Hello world").setForeground(Color.red).setEditable(false).build();
         contentPane.add(helloWorld);
+        Accordion tree = new Accordion();
+        tree.addHeader("Test header", "Lorem ipsum");
+        tree.addHeader("other header", "other lorem ipsum");
+        contentPane.add(tree);
 
         frame.setContentPane(contentPane);
+        frame.setPreferredSize(new Dimension(1000, 600));
         frame.pack();
         frame.setVisible(true);
     }

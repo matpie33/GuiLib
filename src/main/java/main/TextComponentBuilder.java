@@ -1,7 +1,5 @@
 package main;
 
-import org.springframework.stereotype.Component;
-
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
@@ -13,6 +11,8 @@ public class TextComponentBuilder {
     private TextComponentBuilder(TextComponentType textComponentType){
         if (textComponentType.equals(TextComponentType.TEXT_FIELD)){
             textField = new JTextField();
+            textField.setAlignmentX(Component.LEFT_ALIGNMENT);
+
         }
 
     }
