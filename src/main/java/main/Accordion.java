@@ -4,14 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class Accordion extends JPanel {
 
-    public static final String ACCORDION_IMG_PATH = "/accordion.png";
-    private int leftPadding = 40;
+    public static final String ACCORDION_CLOSED_PATH = "/accordion_closed.png";
+    public static final String ACCORDION_OPENED_PATH = "/accordion_opened.png";
+    private final int leftPadding = 40;
+    private final ImageIcon closedAccordionIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource(ACCORDION_CLOSED_PATH)));
+    private final ImageIcon openedAccordionIcon = new ImageIcon(Objects.requireNonNull(getClass().getResource(ACCORDION_OPENED_PATH)));
 
     public Accordion (){
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+
     }
 
     public void addHeader (String header, String content){
@@ -28,19 +34,19 @@ public class Accordion extends JPanel {
 
     private void addAccordionButtonAction(JButton button, JPanel contentPanel) {
         button.addActionListener(new ActionListener() {
-            boolean isPanelVisible = false;
+            boolean isAccordionOpened = false;
             @Override
             public void actionPerformed(ActionEvent e) {
-                isPanelVisible = !isPanelVisible;
-                contentPanel.setVisible(isPanelVisible);
+                isAccordionOpened = !isAccordionOpened;
+                 button.setIcon(isAccordionOpened ? openedAccordionIcon : closedAccordionIcon);
+                contentPanel.setVisible(isAccordionOpened);
             }
         });
     }
 
     private JButton createAccordionButton(String header) {
-        ImageIcon defaultIcon = new ImageIcon(getClass().getResource(ACCORDION_IMG_PATH));
         return ButtonBuilder.create(header).removeBorder()
-                        .setFontSize(16f).setTransparent().setIcon(defaultIcon).build();
+                        .setFontSize(16f).setTransparent().setIcon(closedAccordionIcon).build();
     }
 
 }
