@@ -35,6 +35,7 @@ public class Window {
         combo.addItem(252525);
         combo.addItem(5252);
         contentPane.add(combo);
+        contentPane.add(new DatePicker());
 
         frame.setContentPane(contentPane);
         frame.setPreferredSize(new Dimension(1000, 600));
